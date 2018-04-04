@@ -18,12 +18,12 @@ class Employer {
 
     std::string getName();
     std::string getCPF();
+    float getSalary();
     Date getHiredAt();
 
-    void salaryIncrease(int perc);
+    void salaryIncrease(float perc);
     bool matchCPF(std::string cpf_);
 
-    friend bool operator==(Employer const f, Employer const f_);
     friend std::ostream& operator<<(std::ostream &o, Employer const f);
 };
 #endif

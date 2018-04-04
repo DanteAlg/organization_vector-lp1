@@ -22,7 +22,7 @@ class Organization {
 
     void addEmployer(Employer *f);
     void increaseSalaryFor(string cpf, float perc);
-    void hiredAfter(Date init_);
+    void hiredAfter(Date *init_);
 
     friend ostream& operator<<(ostream &o, Organization const empresa);
 };

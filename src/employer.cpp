@@ -10,18 +10,15 @@ Employer::~Employer() {}
 
 std::string Employer::getName() { return name; }
 std::string Employer::getCPF() { return cpf; }
+float Employer::getSalary() { return salary; }
 Date Employer::getHiredAt() { return hired_at; }
 
 bool Employer::matchCPF(std::string cpf_) {
   return (cpf.compare(cpf_) == 0);
 }
 
-void Employer::salaryIncrease(int perc) {
-  salary += salary*perc;
-}
-
-bool operator==(Employer &f, Employer &employer) {
-  return f.matchCPF(employer.getCPF());
+void Employer::salaryIncrease(float perc) {
+  salary +=salary*perc;
 }
 
 std::ostream& operator<<(std::ostream &o, Employer const employer) {

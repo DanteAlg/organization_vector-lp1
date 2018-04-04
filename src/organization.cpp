@@ -8,20 +8,22 @@ Organization::Organization(string name_, string cnpj_) {
 Organization::~Organization() {}
 
 bool Organization::invalidEmployer(Employer &f) {
-  for(int i = 0; i <= employees.size(); i++) {
-    if (employees[i] == f) return true;
-  }
+  if (employees.size() > 0)
+    for(int i = 0; i < employees.size(); i++)
+      if (employees[i].matchCPF(f.getCPF())) return true;
 
   return false;
 }
 
 void Organization::addEmployer(Employer *f) {
   if (invalidEmployer(*f)) {
-    cout << "Erro: Funcionário já existe" << endl;
+    cout << "Erro: Funcionário com documento " << f->getCPF() << " já existe" << endl;
     return;
   }
 
   employees.push_back(*f);
+
+  cout << "-> Criou " << *f << "..." << endl;
 }
 
 void Organization::increaseSalaryFor(string cpf, float perc) {
@@ -33,17 +35,20 @@ void Organization::increaseSalaryFor(string cpf, float perc) {
   }
 
   for(int i = 0; i <= employees.size(); i++) {
-    if (employees[i].matchCPF(cpf)) employees[i].salaryIncrease(perc);
+    if (employees[i].matchCPF(cpf)) {
+      employees[i].salaryIncrease(perc);
+      cout << employees[i] << " Ganhou aumento! Seu novo salário é R$" << employees[i].getSalary() << endl;
+    }
   }
 }
 
-void Organization::hiredAfter(Date init_) {
+void Organization::hiredAfter(Date *init_) {
   cout << "/* -------------------------------- */" << endl;
 
-  cout << "name dos funcionários depois da data pesquisada: " << endl;
+  cout << "Nome dos funcionários depois da data pesquisada: " << endl;
 
   for(int i = 0; i <= employees.size(); i++) {
-    if (employees[i].getHiredAt() > init_)
+    if (employees[i].getHiredAt() > *init_)
       cout << "-> " << employees[i] << endl;
   }
 
@@ -54,7 +59,7 @@ void Organization::hiredAfter(Date init_) {
 ostream& operator<<(ostream &o, Organization const empresa) {
   o << "/* -------------------------------- */" << endl;
 
-  o << "name dos funcionários da empresa: " << endl;
+  o << "Nome de todos os funcionários da empresa: " << endl;
 
   for(int i = 0; i < empresa.employees.size(); i++) {
     o <<  "-> " << empresa.employees[i] << endl;
