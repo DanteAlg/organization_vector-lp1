@@ -7,7 +7,7 @@ OBJ = ./build
 BIN = ./bin
 
 CPPFLAGS = -O0 -Wall -pedantic -std=c++11 -I$(INC)
-OBJECTS = $(OBJ)/date.o $(OBJ)/employer.o $(OBJ)/organization.o $(OBJ)/main.o
+OBJECTS = $(OBJ)/date.o $(OBJ)/employer.o $(OBJ)/organization.o $(OBJ)/registration.o $(OBJ)/main.o
 
 PROG = $(BIN)/organization
 
@@ -22,6 +22,9 @@ $(OBJ)/employer.o: $(INC)/employer.h $(OBJ)/date.o
 
 $(OBJ)/organization.o: $(INC)/organization.h $(OBJ)/employer.o $(OBJ)/date.o
 	$(CC) $(CPPFLAGS) -c $(SRC)/organization.cpp -o $@
+
+$(OBJ)/registration.o: $(INC)/registration.h $(OBJ)/organization.o $(OBJ)/employer.o
+	$(CC) $(CPPFLAGS) -c $(SRC)/registration.cpp -o $@
 
 $(OBJ)/main.o: $(OBJ)/organization.o
 	$(CC) $(CPPFLAGS) -c $(SRC)/main.cpp -o $@

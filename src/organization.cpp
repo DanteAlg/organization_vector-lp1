@@ -7,12 +7,20 @@ Organization::Organization(string name_, string cnpj_) {
 
 Organization::~Organization() {}
 
+string Organization::getName() { return name; }
+string Organization::getCNPJ() { return cnpj; }
+int Organization::employeesCount() { return employees.size(); }
+
 bool Organization::invalidEmployer(Employer &f) {
   if (employees.size() > 0)
     for(int i = 0; i < employees.size(); i++)
       if (employees[i].matchCPF(f.getCPF())) return true;
 
   return false;
+}
+
+bool Organization::matchCNPJ(string cnpj_) {
+  return (cnpj.compare(cnpj_) == 0);
 }
 
 void Organization::addEmployer(Employer *f) {

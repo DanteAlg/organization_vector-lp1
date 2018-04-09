@@ -20,9 +20,14 @@ class Organization {
     Organization(string name_, string cnpj_);
     ~Organization();
 
+    string getName();
+    string getCNPJ();
+    int employeesCount();
+
     void addEmployer(Employer *f);
     void increaseSalaryFor(string cpf, float perc);
     void hiredAfter(Date *init_);
+    bool matchCNPJ(string cnpj_);
 
     friend ostream& operator<<(ostream &o, Organization const empresa);
 };
